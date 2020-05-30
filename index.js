@@ -60,16 +60,46 @@ function writeFile(path, data) {
         }
     })
 }
-
+// createJsonFile('../sample.xlsx');
 function createJsonFile(filePath) {
     try {
         if (typeof arguments[0] === 'undefined') {
             throw new Error('ファイル選択をキャンセルしました');
         }
-        const dataExcel = book = xlsx.readFile(filePath) //ファイル読み込み
+        const dataExcel = xlsx.readFile(filePath);
         const sheet_name_list = dataExcel.SheetNames;
         const Sheet1 = dataExcel.Sheets[sheet_name_list[0]];
         const Sheet1_json = utils.sheet_to_json(Sheet1);
+        // const test1cate = sample(Sheet1_json, 1);
+        // const test2cate = sample(Sheet1_json, 2);
+        // const test3cate = sample(Sheet1_json, 3);
+        // const sample1dev = samplePromise(test1cate, test2cate, 2);
+        // const sample2dev = sample(test2cate, test3cate, 3);
+        // let result_concat = sample1dev.concat(sample2dev);
+        // console.log(sample1dev);
+        // const cate1 = Sheet1_json
+        //     .filter(item => item['第1階層カテゴリコード'] == item['カテゴリコード'])
+        //     .map(item => {
+        //         const cate2 = Sheet1_json
+        //             .filter(item2 =>
+        //                 item2['第2階層カテゴリコード'] == item2['カテゴリコード'] &&
+        //                 item['カテゴリコード'] == item2['第1階層カテゴリコード']
+        //             )
+        //             .map(item2 => {
+        //                 const cate3 = Sheet1_json
+        //                     .filter(item3 =>
+        //                         item3['第3階層カテゴリコード'] == item3['カテゴリコード'] &&
+        //                         item2['カテゴリコード'] == item3['第2階層カテゴリコード']
+        //                     )
+        //                     .map(item3 => {
+        //                         const cate4 = [];
+        //                         return (cate4.length) ? Object.assign(item3, { child: [cate4] }) : item3;
+        //                     });
+        //                 return (cate3.length) ? Object.assign(item2, { child: [cate3] }) : item2;
+        //             });
+        //         return (cate2.length) ? Object.assign(item, { child: [cate2] }) : item;
+        //     });
+        // // console.log(cate1);
         let errorMessage = "";
 
         const keysMap = {
@@ -203,6 +233,7 @@ function createJsonFile(filePath) {
             return item;
         });
         const dataJSON = JSON.stringify(resultarray, undefined, 4);
+        // console.log(dataJSON);
         // 改行と空白を整える
         const output = dataJSON
             .replace(/:\s+/g, ":")
